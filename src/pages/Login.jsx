@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react'
-import { FaSignInAlt} from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
+import Spinner from '../components/Spinner'
+import { useSelector, useDispatch } from 'react-redux'
+import { FaSignInAlt } from 'react-icons/fa'
+import { login, reset } from '../store/auth/authSlice'
+
 const Login = () => {
+   const dispatch = useDispatch()
+   const { user, isSuccess, isError, isLoading, message } = useSelector(state => state.auth)
+   const navigate = useNavigate()
+
    const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -12,8 +22,25 @@ const Login = () => {
          [e.target.name]: e.target.value
       }))
    }
+   useEffect(() => {
+      if (isSuccess || user) {
+         navigate('/')
+      }
+      if (isError) {
+         toast.error(message)
+      }
+      dispatch(reset())
+
+   }, [isError, isSuccess, user, dispatch, navigate, message])
+
    const onsubmitHanlder = (e) => {
       e.preventDefault()
+      const userData = { email, password }
+      dispatch(login(userData))
+   }
+
+   if (isLoading) {
+      return <Spinner />
    }
    return (
       <>
