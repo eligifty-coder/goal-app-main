@@ -33,7 +33,7 @@ export const updateUserGoal = async (data, token) => {
       "Authorization": `Bearer ${token}`
    }
    const response = await fetch(`http://localhost:5000/api/v1/goals/${data.id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify({text:data.text}),
       headers: config,
    })

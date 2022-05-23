@@ -76,6 +76,7 @@ const goalSlice = createSlice({
             state.isLoading = true
          })
          .addCase(createGoal.fulfilled, (state, action) => {
+            console.log(state.goals)
             state.goals.push(action.payload)
             state.isError = false
             state.isSuccess = true
@@ -93,7 +94,6 @@ const goalSlice = createSlice({
          })
          .addCase(deleteGoal.fulfilled, (state, action) => {
             const id = action.payload.id
-            console.log(state.goals, 'action')
             state.goals= state.goals.filter(goal=>goal._id !==id)
             state.isError = false
             state.isSuccess = true
@@ -112,15 +112,15 @@ const goalSlice = createSlice({
       
       
          .addCase(updateGoal.fulfilled, (state, action) => {
-            console.log( state.goals,action.payload,'action')
-         //    state.goals = state.goals.map(goal => {
-         //       if (goal._id === action.payload._id) {
-         //          alert('hello')
-         //          return action.payload
-         //       } else {
-         //          return goal
-         //       }
-         //    })
+            state.isLoading = false
+            state.goals = state.goals.map(goal => {
+               if (goal._id === action.payload._id) {
+                
+                  return action.payload
+               } else {
+                  return goal
+               }
+            })
          })
          .addCase(updateGoal.rejected, (state, action) => {
             state.isLoading = false
