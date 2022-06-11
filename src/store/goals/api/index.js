@@ -1,6 +1,6 @@
 
 
-const API_URL = 'http://localhost:5000/api/v1/goals';
+const API_URL = 'https://goal-app-api.herokuapp.com/api/v1/goals';
 
 export const getUserGoals = async (token) => {
    const config = {
@@ -32,7 +32,7 @@ export const updateUserGoal = async (data, token) => {
       "Content-type": "application/json; charset=UTF-8",
       "Authorization": `Bearer ${token}`
    }
-   const response = await fetch(`http://localhost:5000/api/v1/goals/${data.id}`, {
+   const response = await fetch(`https://goal-app-api.herokuapp.com/api/v1/goals/${data.id}`, {
       method: 'PATCH',
       body: JSON.stringify({text:data.text}),
       headers: config,
@@ -47,7 +47,7 @@ export const deleteUserGoal = async (goalId, token) => {
       "Content-type": "application/json; charset=UTF-8",
       "Authorization": `Bearer ${token}`
    }
-   const response = await fetch(`http://localhost:5000/api/v1/goals/${goalId}`, {
+   const response = await fetch(`https://goal-app-api.herokuapp.com/api/v1/goals/${goalId}`, {
       method: 'DELETE',
       headers: config,
    })

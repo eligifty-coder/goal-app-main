@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/v1/users';
+const API_URL = 'https://goal-app-api.herokuapp.com/api/v1/users';
 // register user
 export const registerUser = async (userData) => {
    const response = await axios.post(API_URL, userData);
