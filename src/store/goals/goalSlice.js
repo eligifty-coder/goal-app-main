@@ -75,7 +75,6 @@ const goalSlice = createSlice({
             state.isLoading = true
          })
          .addCase(createGoal.fulfilled, (state, action) => {
-            console.log(state.goals)
             state.goals.push(action.payload)
             state.isError = false
             state.isSuccess = true
